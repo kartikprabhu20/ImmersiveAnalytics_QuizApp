@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-    public Button button1;
-    public Button button2;
     public static int COUNTER = 0;
     private TaskFactory taskFactory;
     private ISubmitButtonListner submitButtonListener;
