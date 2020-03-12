@@ -312,6 +312,10 @@
      <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowStyles.cs" />
      <Compile Include="Assets\Doozy\Examples\Scripts\Editor\UIButtonAutomatedTextValueEditor.cs" />
      <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\DynamicJoystickEditor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\FloatingJoystickEditor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\JoystickEditor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\VariableJoystickEditor.cs" />
      <None Include="Assets\Doozy\Editor\Nody\Shaders\LineDraw.shader" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/vikra/OneDrive/Documents/GitHub/IA-QuizApp/IA QuizApp/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
