@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Controller : MonoBehaviour
+public class ARController : MonoBehaviour
 {
     public static int COUNTER = 0;
     private TaskFactory taskFactory;

@@ -9,7 +9,7 @@ public class RayCastSelector : MonoBehaviour
     public float rayCasteRange = 50f;                                   // Distance in Unity units over which the player can fire
     public Transform rayShooterPosition;                                // Holds a reference to the end of ray shooter, marking the muzzle location of the shooter
     public Camera fpsCam;                                               // Holds a reference to the first person camera
-    public Controller controller;
+    //public ARController controller;
     private GameObject graphGen;
     private GameObject tooltips;
     private GameObject mainToolTip;
@@ -27,18 +27,18 @@ public class RayCastSelector : MonoBehaviour
         laserLine = GetComponent<LineRenderer>();
         // Get and store a reference to our Camera by searching this GameObject and its parents
         fpsCam = GetComponentInParent<Camera>();
-        Debug.Log("controller:" + controller == null);
+        //Debug.Log("controller:" + controller == null);
         //graphGen = controller.plotPrefab;
         Debug.Log("GraphGen:" + graphGen == null);
 
         //tooltips = controller.plotPrefab.transform.Find("Tooltips").gameObject;
-        mainToolTip = tooltips.transform.Find("MainTooltip").gameObject;
+        //mainToolTip = tooltips.transform.Find("MainTooltip").gameObject;
         //xyToolTip = tooltips.transform.Find("XYTooltip").gameObject;
         //xzToolTip = tooltips.transform.Find("XZTooltip").gameObject;
         //yzToolTip = tooltips.transform.Find("YZTooltip").gameObject;
 
-        Debug.Log("toolTip:" + mainToolTip == null);
-        Debug.Log("text:" + mainToolTip.GetComponent<TextMeshPro>().text);
+        //Debug.Log("toolTip:" + mainToolTip == null);
+        //Debug.Log("text:" + mainToolTip.GetComponent<TextMeshPro>().text);
 
     }
 

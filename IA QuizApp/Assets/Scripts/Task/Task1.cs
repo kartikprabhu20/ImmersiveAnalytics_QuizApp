@@ -14,6 +14,7 @@ public class Task1 : Task
 
     public override void init(ISubmitButtonListner submitButtonListener)
     {
+        base.init(submitButtonListener);
         setState(TaskState.INIT);
         base.submitButtonListener = submitButtonListener;
         question = questionFactory.getQuestion(1);

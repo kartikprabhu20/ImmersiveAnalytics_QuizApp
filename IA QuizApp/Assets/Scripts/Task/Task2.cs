@@ -12,6 +12,7 @@ internal class Task2 : Task
 
     public override void init(ISubmitButtonListner submitButtonListener)
     {
+        base.init(submitButtonListener);
         setState(TaskState.INIT);
         question = questionFactory.getQuestion(1);
         execute();

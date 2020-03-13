@@ -7,7 +7,10 @@ public abstract class Task : ITask
     public TaskState state = TaskState.DEFAULT;
     public ISubmitButtonListner submitButtonListener;
 
-    public abstract void init(ISubmitButtonListner submitButtonListener);
+    public virtual void init(ISubmitButtonListner submitButtonListener)
+    {
+        this.submitButtonListener = submitButtonListener;
+    }
     public abstract void execute();
     public abstract void result();
 
