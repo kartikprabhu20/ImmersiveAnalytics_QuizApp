@@ -160,7 +160,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -264,12 +264,6 @@ MonoBehaviour:
   rayCasteRange: 50
   rayShooterPosition: {fileID: 1363970658}
   fpsCam: {fileID: 991964732}
---- !u!224 &607596292 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2621304940095152398, guid: 01beea02eaad1254892eaa3a99e33c3f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7063357076584308211}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &896072066
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +743,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 607596292}
+  - {fileID: 7063357076584308212}
   - {fileID: 58089829}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -962,3 +956,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01beea02eaad1254892eaa3a99e33c3f, type: 3}
+--- !u!224 &7063357076584308212 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3164149756443460263, guid: 01beea02eaad1254892eaa3a99e33c3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7063357076584308211}
+  m_PrefabAsset: {fileID: 0}

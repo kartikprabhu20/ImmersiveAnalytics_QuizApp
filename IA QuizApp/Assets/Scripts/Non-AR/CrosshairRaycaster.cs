@@ -28,22 +28,28 @@ public class CrosshairRaycaster : MonoBehaviour
 
         if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
         {
-            if (hitObject == null)
+            if(hitObject.tag == "DataPoint")
             {
-                hitObject = hitInfo.collider;
-                hitObjectMaterial = hitObject.GetComponent<Renderer>().material;
-                initialColor = hitObjectMaterial.color;
-            }
+                if (hitObject == null)
+                {
+                    hitObject = hitInfo.collider;
+                    hitObjectMaterial = hitObject.GetComponent<Renderer>().material;
+                    initialColor = hitObjectMaterial.color;
+                }
 
-            hitObjectMaterial.color = highlightColor;
+                hitObjectMaterial.color = highlightColor;
+            }
         }
         else
         {
-            if (hitObject != null)
+            if (hitObject.tag == "DataPoint")
             {
-                hitObjectMaterial.color = initialColor;
-                hitObject = null;
-                hitObjectMaterial = null;
+                if (hitObject != null)
+                {
+                    hitObjectMaterial.color = initialColor;
+                    hitObject = null;
+                    hitObjectMaterial = null;
+                }
             }
         }
     }
