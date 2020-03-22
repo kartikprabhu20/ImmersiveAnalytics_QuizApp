@@ -215,12 +215,13 @@ public class PlaneController : Manipulator
 
                     masterCanvas.SetActive(true);
 
-                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignPointsHolder(plotPrefab.transform.Find("PointsHolder").gameObject);
-                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignGraphGen(plotPrefab);
+                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignPointsHolder(plotPrefab.transform.Find("Points").gameObject);
+                    scatterPlotManager.GetComponent<ScatterplotGenerator>().assignScatterPlot(plotPrefab);
 
-                    //scatterPlotManager = Instantiate(scatterPlotManager);
+                    scatterPlotManager = Instantiate(scatterPlotManager);
+
                     //PlotLoader plotLoader = new PlotLoader(settingsManager, scatterPlotManager);
-                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().initPlot(plotLoader);
+                    scatterPlotManager.GetComponent<ScatterplotGenerator>().initPlot();
 
                     //Debug.Log("Glyph: " + settingsManager.GetComponent<SettingsManager>().getScatterPlotGenerator().getGlyphList().Count);
 

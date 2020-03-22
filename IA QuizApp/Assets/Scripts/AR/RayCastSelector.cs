@@ -11,8 +11,8 @@ public class RayCastSelector : MonoBehaviour
     public Camera fpsCam;                                               // Holds a reference to the first person camera
     //public ARController controller;
     private GameObject graphGen;
-    private GameObject tooltips;
-    private GameObject mainToolTip;
+    //private GameObject tooltips;
+    //private GameObject mainToolTip;
     //private GameObject xyToolTip;
     //private GameObject yzToolTip;
     //private GameObject xzToolTip;
@@ -71,8 +71,8 @@ public class RayCastSelector : MonoBehaviour
                 }
                 previousGameObject.GetComponent<MeshRenderer>().material.color = new Color(230, 224, 209);
 
-                tooltips.SetActive(true);
-                mainToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
+                //tooltips.SetActive(true);
+                //mainToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
                 //xyToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
                 //yzToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
                 //xzToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
@@ -80,7 +80,7 @@ public class RayCastSelector : MonoBehaviour
             }
             else
             {
-                tooltips.SetActive(false);
+                //tooltips.SetActive(false);
                 // If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
                 laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * rayCasteRange));
                 resetGameObject();

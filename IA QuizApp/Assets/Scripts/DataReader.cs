@@ -55,11 +55,14 @@ public class DataReader : MonoBehaviour
     public void LoadData()
     {
         bool is3DPlot = true; // to be passed to this function as a parameter
-        string fileName = "Iris";
+        string fileName = "Dataset/iris";  
         TextAsset fileContents = Resources.Load<TextAsset>(fileName);
+
+        print("fileContents " + fileContents.text);
 
         string[] data = fileContents.text.Split(lineSeperator);
         string[] header = data[0].Split(textSeperator); // Get the header properties of the file
+
 
         /*string fileContents = BetterStreamingAssets.ReadAllText("Dataset/" + DataText.text + ".csv");
 
@@ -68,9 +71,10 @@ public class DataReader : MonoBehaviour
         RowCount = GetRowCount(data);
         ColumnCount = GetColumnCount(header);
 
+
         LoadDataFrame(data, is3DPlot); // loads the contents from 'data' to 'DataFrame'
 
-        // print(RowCount + " " + ColumnCount);
+        print(RowCount + " " + ColumnCount);
     }
 
     private int GetRowCount(string[] data)

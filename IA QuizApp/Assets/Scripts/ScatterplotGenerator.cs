@@ -32,8 +32,9 @@ public class ScatterplotGenerator : MonoBehaviour
 
     //PlotLoader plotLoadIndicator;
 
-    public void initPlot(PlotLoader plotLoad)
+    public void initPlot()
     {
+
         //plotLoadIndicator = plotLoad;
         reader.LoadData();
         dataPoints = reader.DataFrame;
@@ -53,15 +54,15 @@ public class ScatterplotGenerator : MonoBehaviour
 
     //}
 
-    public void assignPointsHolder(GameObject pointsHolderClone)
-    {
-        pointsHolder = pointsHolderClone;
-    }
+    //public void assignPointsHolder(GameObject pointsHolderClone)
+    //{
+    //    pointsHolder = pointsHolderClone;
+    //}
 
-    public void assignGraphGen(GameObject graphGenClone)
+    public void assignScatterPlot(GameObject graphGenClone)
     {
         graphGen = graphGenClone;
-        pointsHolder = graphGen.transform.Find("PointsHolder").gameObject;
+        pointsHolder = graphGen.transform.Find("Points").gameObject;
     }
 
     IEnumerator CreateScatterplot()
@@ -90,7 +91,7 @@ public class ScatterplotGenerator : MonoBehaviour
 
             plotscale = graphGen.transform.localScale.x;
             Vector3 offsetToZeroCoordinate = new Vector3(-0.5f * plotscale, 0f, -0.5f * plotscale); //(-0.5,0,-0.5) is ZeroCordinates for plane
-            objectPosition = (new Vector3(x, y, z)) * plotscale + pointsHolder.transform.position + offsetToZeroCoordinate;
+            objectPosition = (new Vector3(x, y, z)) * plotscale + pointsHolder.transform.position;// + offsetToZeroCoordinate;
 
             //yield return new WaitForSeconds(.000000001f);
             glyph = Instantiate(defaultGlyph, objectPosition, Quaternion.identity);
