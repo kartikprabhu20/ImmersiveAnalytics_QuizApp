@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ARController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
-    public static int COUNTER = 0;
+
+    private static int COUNTER = 0;
     private TaskFactory taskFactory;
+    public Canvas masterCanvas;
+    private GameObject scatterplot;
     private ISubmitButtonListner submitButtonListener;
 
     // Start is called before the first frame update
+
     void Start()
     {
         COUNTER++;
@@ -22,8 +26,21 @@ public class ARController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void selectScatterplot()
+    {
+        scatterplot.SetActive(true);
+        //Selection.activeGameObject = scatterplot;
+    }
+
+    public void setScatterplot(GameObject plotPrefab)
+    {
+        scatterplot = plotPrefab;
+    }
+
+
 
     class SubmitButtonListener : ISubmitButtonListner
     {
@@ -45,5 +62,5 @@ public class ARController : MonoBehaviour
 
 public interface ISubmitButtonListner
 {
-   void submitted();
+    void submitted();
 }

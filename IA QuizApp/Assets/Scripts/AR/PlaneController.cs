@@ -21,8 +21,9 @@ public class PlaneController : Manipulator
     public GameObject pointCloud;
     public GameObject planeDiscovery;
     public GameObject manipulatorPrefab;
-    public GameObject selectionCanvas;
-    //public GameObject scatterPlotManager;
+    public GameObject masterCanvas;
+    public GameObject arController;
+    public GameObject scatterPlotManager;
     //public GameObject settingsManager;
 
     /// <summary>
@@ -57,7 +58,7 @@ public class PlaneController : Manipulator
         planeGenerator = Instantiate(planeGenerator);
         pointCloud = Instantiate(pointCloud);
         planeDiscovery = Instantiate(planeDiscovery);
-        selectionCanvas.SetActive(false);
+        masterCanvas.SetActive(false);
 
     }
 
@@ -192,7 +193,6 @@ public class PlaneController : Manipulator
                 {
                     // Instantiate game object at the hit pose.
                     plotPrefab = Instantiate(plotPrefab, hit.Pose.position, hit.Pose.rotation);
-
                     stopPlaneDetection();
                     m_IsAnchored = true;
 
@@ -213,9 +213,9 @@ public class PlaneController : Manipulator
                     // Select the placed object.
                     manipulatorPrefab.GetComponent<Manipulator>().Select();
 
-                    selectionCanvas.SetActive(true);
+                    masterCanvas.SetActive(true);
 
-                    ////scatterPlotManager.GetComponent<ScatterplotGenerator>().assignPointsHolder(plotPrefab.transform.Find("PointsHolder").gameObject);
+                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignPointsHolder(plotPrefab.transform.Find("PointsHolder").gameObject);
                     //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignGraphGen(plotPrefab);
 
                     //scatterPlotManager = Instantiate(scatterPlotManager);
@@ -231,21 +231,21 @@ public class PlaneController : Manipulator
 
 
 
-    //public class PlotLoad : IPlotLoad
-    //{
-    //    private GameObject settingsManager;
-    //    private GameObject scatterPlotManager;
+    public class PlotLoad : IPlotLoad
+    {
+        private GameObject settingsManager;
+        private GameObject scatterPlotManager;
 
-    //    public PlotLoad(GameObject settingsManager, GameObject scatterPlotManager)
-    //    {
-    //        this.settingsManager = settingsManager;
-    //        this.scatterPlotManager = scatterPlotManager;
-    //    }
+        public PlotLoad(GameObject settingsManager, GameObject scatterPlotManager)
+        {
+            this.settingsManager = settingsManager;
+            this.scatterPlotManager = scatterPlotManager;
+        }
 
-    //    public void callback()
-    //    {
-    //        settingsManager.GetComponent<SettingsManager>().setScatterPlotGenerator(scatterPlotManager.GetComponent<ScatterplotGenerator>());
-    //        settingsManager.GetComponent<SettingsManager>().initSettings();
-    //    }
-    //}
+        public void callback()
+        {
+            //settingsManager.GetComponent<SettingsManager>().setScatterPlotGenerator(scatterPlotManager.GetComponent<ScatterplotGenerator>());
+            //settingsManager.GetComponent<SettingsManager>().initSettings();
+        }
+    }
 }
