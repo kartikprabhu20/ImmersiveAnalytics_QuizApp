@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
+using Doozy.Engine.UI;
 
 public class CrosshairController : MonoBehaviour
 {
-
     [SerializeField]
-    [Range(50, 1000)]
-    float speed;
+    UICanvas canvas;
 
     [SerializeField]
     FixedJoystick fixedJoystick;
 
+    [SerializeField]
+    [Range(50, 1000)]
+    float speed;
 
     Vector3 position;
     RectTransform rectTransform;
@@ -24,5 +26,12 @@ public class CrosshairController : MonoBehaviour
     {
         position = new Vector3(fixedJoystick.Horizontal, fixedJoystick.Vertical, 0) * speed * Time.deltaTime;
         rectTransform.Translate(position);
+
+        /*if(rectTransform.position.x > canvas.RectTransform.position.x)
+        {
+            Debug.Log("Crosshair: " + rectTransform.position + " Canvas: " + canvas.RectTransform.rect);
+            rectTransform.Translate(-position);
+        }*/
+
     }
 }

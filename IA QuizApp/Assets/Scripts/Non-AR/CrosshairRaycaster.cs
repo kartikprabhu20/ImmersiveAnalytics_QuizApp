@@ -23,7 +23,7 @@ public class CrosshairRaycaster : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         layerMask = LayerMask.GetMask("Points");
-        hitDistance = 3f;
+        hitDistance = 15f;
     }
 
     void Update()
@@ -41,10 +41,11 @@ public class CrosshairRaycaster : MonoBehaviour
             }
 
             hitObjectMaterial.color = highlightColor;
-
+            GetComponent<AxisRaycast>().UpdateLineRenderer(hitObject.transform);
         }
         else
         {
+            GetComponent<AxisRaycast>().DisableRays();
             if (hitObject != null)
             {
                 hitObjectMaterial.color = initialColor;
