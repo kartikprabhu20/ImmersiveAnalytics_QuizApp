@@ -16,9 +16,14 @@ public class CrosshairRaycaster : MonoBehaviour
     Material hitObjectMaterial;
 
 
-    void Start()
+    int layerMask;
+    float hitDistance;
+
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        layerMask = LayerMask.GetMask("Points");
+        hitDistance = 3f;
     }
 
     void Update()
@@ -26,31 +31,27 @@ public class CrosshairRaycaster : MonoBehaviour
         rayOrigin = rectTransform.position;
         ray = Camera.main.ScreenPointToRay(rayOrigin);
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
+        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo, hitDistance, layerMask))
         {
-            if(hitObject.tag == "DataPoint")
+            if (hitObject == null)
             {
-                if (hitObject == null)
-                {
-                    hitObject = hitInfo.collider;
-                    hitObjectMaterial = hitObject.GetComponent<Renderer>().material;
-                    initialColor = hitObjectMaterial.color;
-                }
-
-                hitObjectMaterial.color = highlightColor;
+                hitObject = hitInfo.collider;
+                hitObjectMaterial = hitObject.GetComponent<Renderer>().material;
+                initialColor = hitObjectMaterial.color;
             }
+
+            hitObjectMaterial.color = highlightColor;
+
         }
         else
         {
-            if (hitObject.tag == "DataPoint")
+            if (hitObject != null)
             {
-                if (hitObject != null)
-                {
-                    hitObjectMaterial.color = initialColor;
-                    hitObject = null;
-                    hitObjectMaterial = null;
-                }
+                hitObjectMaterial.color = initialColor;
+                hitObject = null;
+                hitObjectMaterial = null;
             }
+
         }
     }
 }
