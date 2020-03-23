@@ -34,11 +34,8 @@ public class AxisRaycast : MonoBehaviour
 
     public void UpdateLineRenderer(Transform m_transform)
     {
-        Debug.Log(" m_transform:" + m_transform.position);
-
         EnableRays();
         SetRays(m_transform);
-        Debug.Log(" xRay.origin:" + xRay.origin);
 
         if (Physics.Raycast(xRay.origin, xRay.direction, out hitInfo, hitDistance, layerMask))
         {

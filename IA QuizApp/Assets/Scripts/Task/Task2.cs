@@ -26,10 +26,10 @@ internal class Task2 : Task
         setState(TaskState.EXECUTION);
         questionObject.GetComponent<Text>().text = question.getText();
 
-        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 1/Label").gameObject.GetComponent<Text>().text = "test1";
-        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 2/Label").gameObject.GetComponent<Text>().text = "test2";
-        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 3/Label").gameObject.GetComponent<Text>().text = "test3";
-        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 4/Label").gameObject.GetComponent<Text>().text = "test4";
+        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 1/Label").gameObject.GetComponent<Text>().text = "test1";
+        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 2/Label").gameObject.GetComponent<Text>().text = "test2";
+        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 3/Label").gameObject.GetComponent<Text>().text = "test3";
+        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 4/Label").gameObject.GetComponent<Text>().text = "test4";
 
     }
 
