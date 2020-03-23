@@ -20,6 +20,7 @@ public class RayCastSelector : MonoBehaviour
     private LineRenderer laserLine;                                     // Reference to the LineRenderer component which will display our laserline
     private Color previousGameObjectColor;
     private GameObject previousGameObject;
+    int layerMask;
 
     void Start()
     {
@@ -30,6 +31,9 @@ public class RayCastSelector : MonoBehaviour
         //Debug.Log("controller:" + controller == null);
         //graphGen = controller.plotPrefab;
         Debug.Log("GraphGen:" + scatterPlotPrefab == null);
+        layerMask = ~LayerMask.GetMask("Planes");
+
+
 
         //tooltips = controller.plotPrefab.transform.Find("Tooltips").gameObject;
         //mainToolTip = tooltips.transform.Find("MainTooltip").gameObject;
@@ -57,7 +61,7 @@ public class RayCastSelector : MonoBehaviour
             laserLine.SetPosition(0, rayShooterPosition.position);
 
             // Check if our raycast has hit anything
-            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, rayCasteRange))
+            if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, rayCasteRange, layerMask))
             {
                 GetComponent<AxisRaycast>().UpdateLineRenderer(hit.collider.transform);
 

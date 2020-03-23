@@ -22,7 +22,7 @@ public class CrosshairRaycaster : MonoBehaviour
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        layerMask = LayerMask.GetMask("Points");
+        layerMask = ~(1 << LayerMask.NameToLayer("Planes"));
         hitDistance = 15f;
     }
 
