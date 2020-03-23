@@ -21,14 +21,14 @@ public class AxisRaycast : MonoBehaviour
     private void Awake()
     {
         layerMask = LayerMask.GetMask("Planes");
-        hitDistance = 3f;
+        hitDistance = 15f;
     }
 
     private void SetRays(Transform m_transform)
     {
-        xRay = new Ray(m_transform.position, Vector3.down);
-        yRay = new Ray(m_transform.position, Vector3.left);
-        zRay = new Ray(m_transform.position, Vector3.forward);
+        xRay = new Ray(m_transform.position, m_transform.up * -1);
+        yRay = new Ray(m_transform.position, m_transform.right * -1);
+        zRay = new Ray(m_transform.position, m_transform.forward);
 
     }
 
