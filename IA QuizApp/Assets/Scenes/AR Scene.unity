@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 548741104}
   - component: {fileID: 548741105}
   - component: {fileID: 548741106}
+  - component: {fileID: 548741107}
   m_Layer: 0
   m_Name: Selector
   m_TagString: Untagged
@@ -428,6 +429,21 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &548741107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548741103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46601b85f27ce64fbe56847e846e294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xLine: {fileID: 0}
+  yLine: {fileID: 0}
+  zLine: {fileID: 0}
 --- !u!1 &654619857 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2087237427796040917, guid: aaf8d97caa35449629f5273434268e98,
@@ -699,6 +715,7 @@ MonoBehaviour:
     type: 3}
   manipulatorPrefab: {fileID: 1122865395318488, guid: 24556cd4924884d9aaa3d80135c8021d,
     type: 3}
+  selector: {fileID: 548741103}
   plotPrefab: {fileID: 5761378256131357207, guid: cdb6daa0093764eb1bcf0688d6312430,
     type: 3}
   masterCanvas: {fileID: 654619857}

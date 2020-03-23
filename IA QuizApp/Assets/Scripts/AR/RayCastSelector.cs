@@ -10,7 +10,7 @@ public class RayCastSelector : MonoBehaviour
     public Transform rayShooterPosition;                                // Holds a reference to the end of ray shooter, marking the muzzle location of the shooter
     public Camera fpsCam;                                               // Holds a reference to the first person camera
     //public ARController controller;
-    private GameObject graphGen;
+    private GameObject scatterPlotPrefab;
     //private GameObject tooltips;
     //private GameObject mainToolTip;
     //private GameObject xyToolTip;
@@ -29,7 +29,7 @@ public class RayCastSelector : MonoBehaviour
         fpsCam = GetComponentInParent<Camera>();
         //Debug.Log("controller:" + controller == null);
         //graphGen = controller.plotPrefab;
-        Debug.Log("GraphGen:" + graphGen == null);
+        Debug.Log("GraphGen:" + scatterPlotPrefab == null);
 
         //tooltips = controller.plotPrefab.transform.Find("Tooltips").gameObject;
         //mainToolTip = tooltips.transform.Find("MainTooltip").gameObject;
@@ -59,6 +59,8 @@ public class RayCastSelector : MonoBehaviour
             // Check if our raycast has hit anything
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, rayCasteRange))
             {
+                GetComponent<AxisRaycast>().UpdateLineRenderer(hit.collider.transform);
+
                 // Set the end position for our laser line 
                 laserLine.SetPosition(1, hit.point);
                 //Debug.Log("color1:" + previousGameObjectColor);
@@ -71,6 +73,7 @@ public class RayCastSelector : MonoBehaviour
                 }
                 previousGameObject.GetComponent<MeshRenderer>().material.color = new Color(230, 224, 209);
 
+
                 //tooltips.SetActive(true);
                 //mainToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
                 //xyToolTip.GetComponent<TextMeshPro>().SetText(previousGameObject.name);
@@ -82,6 +85,7 @@ public class RayCastSelector : MonoBehaviour
             {
                 //tooltips.SetActive(false);
                 // If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
+                GetComponent<AxisRaycast>().DisableRays();
                 laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * rayCasteRange));
                 resetGameObject();
 

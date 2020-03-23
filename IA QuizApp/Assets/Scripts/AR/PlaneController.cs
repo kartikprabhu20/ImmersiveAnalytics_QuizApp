@@ -20,6 +20,7 @@ public class PlaneController : Manipulator
     public GameObject pointCloud;
     public GameObject planeDiscovery;
     public GameObject manipulatorPrefab;
+    public GameObject selector;
 
     public GameObject plotPrefab;
     public GameObject masterCanvas;
@@ -59,6 +60,7 @@ public class PlaneController : Manipulator
         planeGenerator = Instantiate(planeGenerator);
         pointCloud = Instantiate(pointCloud);
         planeDiscovery = Instantiate(planeDiscovery);
+        //selector = Instantiate(selector);
         masterCanvas.SetActive(false);
 
     }
@@ -221,6 +223,16 @@ public class PlaneController : Manipulator
                     arController.GetComponent<Controller>().assignScatterplot(plotPrefab);
                     arController.GetComponent<Controller>().assignScatterPlotManager(scatterPlotManager);
                     arController = Instantiate(arController, hit.Pose.position, hit.Pose.rotation);
+
+                    LineRenderer xLine = plotPrefab.transform.Find("Lines/LineX").gameObject.transform.GetComponent<LineRenderer>();
+                    LineRenderer yLine = plotPrefab.transform.Find("Lines/LineY").gameObject.transform.GetComponent<LineRenderer>();
+                    LineRenderer zLine = plotPrefab.transform.Find("Lines/LineZ").gameObject.transform.GetComponent<LineRenderer>();
+
+                    //assign cordinate lines
+                    selector.GetComponent<AxisRaycast>().initLines(xLine,yLine,zLine);
+                    xLine.gameObject.SetActive(false);
+                    yLine.gameObject.SetActive(false);
+                    zLine.gameObject.SetActive(false);
 
                 }
             }
