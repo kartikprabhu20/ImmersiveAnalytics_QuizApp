@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 internal class Task2 : Task
 {
@@ -23,12 +24,19 @@ internal class Task2 : Task
     {
         Debug.Log("task2 execute");
         setState(TaskState.EXECUTION);
-        //result();
+        questionObject.GetComponent<Text>().text = question.getText();
+
+        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 1/Label").gameObject.GetComponent<Text>().text = "test1";
+        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 2/Label").gameObject.GetComponent<Text>().text = "test2";
+        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 3/Label").gameObject.GetComponent<Text>().text = "test3";
+        masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/RadioGroup/Option 4/Label").gameObject.GetComponent<Text>().text = "test4";
+
     }
 
 
     public override void result()
     {
+        hideOverlayButton.onClick.Invoke();
         Debug.Log("task2 result");
         setState(TaskState.RESULT);
         taskListener.submitted();

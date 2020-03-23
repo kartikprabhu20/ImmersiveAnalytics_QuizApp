@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Task1 : Task
 {
@@ -14,11 +15,10 @@ public class Task1 : Task
 
     public override void init(ITaskListener taskListener, GameObject masterCanvas)
     {
-        setState(TaskState.INIT);
         base.init(taskListener, masterCanvas);
+        setState(TaskState.INIT);
         base.taskListener = taskListener;
         question = questionFactory.getQuestion(1);
-
         execute();
     }
 
@@ -26,16 +26,16 @@ public class Task1 : Task
     {
         Debug.Log("task1 execute");
         setState(TaskState.EXECUTION);
-
-        questionObject.GetComponent<UnityEngine.UI.Text>().text = question.getText();
+        questionObject.GetComponent<Text>().text = question.getText();
         //result();
     }
 
 
     public override void result()
     {
+        hideOverlayButton.onClick.Invoke();
+        masterCanvas.transform.Find("Overlay - Input").gameObject.SetActive(false);
         Debug.Log("task1 result");
-
         setState(TaskState.RESULT);
         taskListener.submitted();
     }
