@@ -46,18 +46,8 @@ public class ScatterplotGenerator : MonoBehaviour
             clusterColorMap.Add(clusterName, colorMapCounter++);
         }
 
-        StartCoroutine(CreateScatterplot());
+        StartCoroutine(createScatterplot());
     }
-
-    //void Start()
-    //{
-
-    //}
-
-    //public void assignPointsHolder(GameObject pointsHolderClone)
-    //{
-    //    pointsHolder = pointsHolderClone;
-    //}
 
     public void assignScatterPlot(GameObject graphGenClone)
     {
@@ -65,13 +55,13 @@ public class ScatterplotGenerator : MonoBehaviour
         pointsHolder = graphGen.transform.Find("Points").gameObject;
     }
 
-    IEnumerator CreateScatterplot()
+    IEnumerator createScatterplot()
     {
 
-        float[] minValues = GetMinValues();
-        float[] maxValues = GetMaxValues();
+        float[] minValues = getMinValues();
+        float[] maxValues = getMaxValues();
 
-        SetMinMax(minValues, maxValues);
+        setMinMax(minValues, maxValues);
         Vector3 objectPosition;
         GameObject glyph;
 
@@ -123,7 +113,7 @@ public class ScatterplotGenerator : MonoBehaviour
         //plotLoadIndicator.callback();
     }
 
-    float[] GetMinValues()
+    float[] getMinValues()
     {
         float[] minValues = new float[3]; // { 0: x, 1: y, 2: z}
 
@@ -150,7 +140,7 @@ public class ScatterplotGenerator : MonoBehaviour
         return minValues;
     }
 
-    float[] GetMaxValues()
+    float[] getMaxValues()
     {
         float[] maxValues = new float[3]; // { 0: x, 1: y, 2: z}
 
@@ -177,7 +167,7 @@ public class ScatterplotGenerator : MonoBehaviour
         return maxValues;
     }
 
-    void SetMinMax(float[] minValues, float[] maxValues)
+    void setMinMax(float[] minValues, float[] maxValues)
     {
         xMin = minValues[0];
         yMin = minValues[1];

@@ -16,14 +16,15 @@ public class PlaneController : Manipulator
     /// <summary>
     /// A prefab to place when a raycast from a user touch hits a horizontal plane.
     /// </summary>
-    public GameObject plotPrefab;
     public GameObject planeGenerator;
     public GameObject pointCloud;
     public GameObject planeDiscovery;
     public GameObject manipulatorPrefab;
+
+    public GameObject plotPrefab;
     public GameObject masterCanvas;
-    public GameObject arController;
     public GameObject scatterPlotManager;
+    public GameObject arController;
     //public GameObject settingsManager;
 
     /// <summary>
@@ -191,7 +192,7 @@ public class PlaneController : Manipulator
 
                 if (!m_IsAnchored)
                 {
-                    // Instantiate game object at the hit pose.
+                    // Instantiate game object at the hit pose
                     plotPrefab = Instantiate(plotPrefab, hit.Pose.position, hit.Pose.rotation);
                     stopPlaneDetection();
                     m_IsAnchored = true;
@@ -205,25 +206,21 @@ public class PlaneController : Manipulator
 
                     // Make manipulator a child of the anchor.
                     manipulatorPrefab.transform.parent = anchor.transform;
-
                     // Make game object a child of the manipulator.
                     plotPrefab.transform.parent = manipulatorPrefab.transform;
-
-
                     // Select the placed object.
                     manipulatorPrefab.GetComponent<Manipulator>().Select();
 
-                    masterCanvas.SetActive(true);
-
-                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().assignPointsHolder(plotPrefab.transform.Find("Points").gameObject);
+                    //Scatterplotmanager
                     scatterPlotManager.GetComponent<ScatterplotGenerator>().assignScatterPlot(plotPrefab);
-
                     scatterPlotManager = Instantiate(scatterPlotManager);
-
-                    //PlotLoader plotLoader = new PlotLoader(settingsManager, scatterPlotManager);
                     scatterPlotManager.GetComponent<ScatterplotGenerator>().initPlot();
 
-                    //Debug.Log("Glyph: " + settingsManager.GetComponent<SettingsManager>().getScatterPlotGenerator().getGlyphList().Count);
+                    //instantiate Controller
+                    arController.GetComponent<Controller>().assignMasterCanvas(masterCanvas);
+                    arController.GetComponent<Controller>().assignScatterplot(plotPrefab);
+                    arController.GetComponent<Controller>().assignScatterPlotManager(scatterPlotManager);
+                    arController = Instantiate(arController, hit.Pose.position, hit.Pose.rotation);
 
                 }
             }

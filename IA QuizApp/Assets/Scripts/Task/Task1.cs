@@ -12,12 +12,13 @@ public class Task1 : Task
         this.questionFactory = questionFactory;
     }
 
-    public override void init(ISubmitButtonListner submitButtonListener)
+    public override void init(ITaskListener taskListener, GameObject masterCanvas)
     {
-        base.init(submitButtonListener);
         setState(TaskState.INIT);
-        base.submitButtonListener = submitButtonListener;
+        base.init(taskListener, masterCanvas);
+        base.taskListener = taskListener;
         question = questionFactory.getQuestion(1);
+
         execute();
     }
 
@@ -25,7 +26,9 @@ public class Task1 : Task
     {
         Debug.Log("task1 execute");
         setState(TaskState.EXECUTION);
-        result();
+
+        questionObject.GetComponent<UnityEngine.UI.Text>().text = question.getText();
+        //result();
     }
 
 
@@ -34,6 +37,6 @@ public class Task1 : Task
         Debug.Log("task1 result");
 
         setState(TaskState.RESULT);
-        submitButtonListener.submitted();
+        taskListener.submitted();
     }
 }

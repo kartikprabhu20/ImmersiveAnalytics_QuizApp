@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -6,21 +7,22 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
 
-    private static int COUNTER = 0;
+    private static int COUNTER = 1;
     private TaskFactory taskFactory;
-    public Canvas masterCanvas;
-    private GameObject scatterplot;
-    private ISubmitButtonListner submitButtonListener;
+    public GameObject masterCanvas;
+    public GameObject scatterplot;
+    public GameObject scatterPlotManager;
+
+    private ITaskListener taskListener;
 
     // Start is called before the first frame update
 
     void Start()
     {
-        COUNTER++;
-        taskFactory = TaskFactory.Instance;
-        submitButtonListener = new SubmitButtonListener(taskFactory);
-        taskFactory.getTask(COUNTER).init(submitButtonListener);
-
+        masterCanvas.SetActive(true); //In case of AR canvas needs to be set to active
+        taskFactory = TaskFactory.Instance; //singleton
+        taskListener = new TaskListener(taskFactory, masterCanvas);
+        taskFactory.getTask(COUNTER).init(taskListener, masterCanvas);
     }
 
     // Update is called once per frame
@@ -35,32 +37,42 @@ public class Controller : MonoBehaviour
         //Selection.activeGameObject = scatterplot;
     }
 
-    public void setScatterplot(GameObject plotPrefab)
+    public void assignScatterplot(GameObject plotPrefab)
     {
         scatterplot = plotPrefab;
     }
 
+    internal void assignMasterCanvas(GameObject masterCanvas)
+    {
+        this.masterCanvas = masterCanvas;
+    }
 
+    internal void assignScatterPlotManager(GameObject scatterPlotManager)
+    {
+        this.scatterPlotManager = scatterPlotManager;
+    }
 
-    class SubmitButtonListener : ISubmitButtonListner
+    class TaskListener : ITaskListener
     {
         private TaskFactory taskFactory;
+        private GameObject masterCanvas;
 
-        public SubmitButtonListener(TaskFactory taskFactory)
+        public TaskListener(TaskFactory taskFactory, GameObject masterCanvas)
         {
             this.taskFactory = taskFactory;
+            this.masterCanvas = masterCanvas;
         }
 
         public void submitted()
         {
             Debug.Log("Counter:" + COUNTER);
             COUNTER++;
-            taskFactory.getTask(COUNTER).init(this);
+            taskFactory.getTask(COUNTER).init(this, masterCanvas);
         }
     }
 }
 
-public interface ISubmitButtonListner
+public interface ITaskListener
 {
     void submitted();
 }

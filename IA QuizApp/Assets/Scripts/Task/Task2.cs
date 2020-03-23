@@ -10,11 +10,12 @@ internal class Task2 : Task
         this.questionFactory = questionFactory;
     }
 
-    public override void init(ISubmitButtonListner submitButtonListener)
+    public override void init(ITaskListener submitButtonListener, GameObject masterCanvas)
     {
-        base.init(submitButtonListener);
+        setType(TaskType.TYPE_2);
+        base.init(submitButtonListener, masterCanvas);
         setState(TaskState.INIT);
-        question = questionFactory.getQuestion(1);
+        question = questionFactory.getQuestion(2);
         execute();
     }
 
@@ -22,7 +23,7 @@ internal class Task2 : Task
     {
         Debug.Log("task2 execute");
         setState(TaskState.EXECUTION);
-        result();
+        //result();
     }
 
 
@@ -30,7 +31,7 @@ internal class Task2 : Task
     {
         Debug.Log("task2 result");
         setState(TaskState.RESULT);
-        submitButtonListener.submitted();
+        taskListener.submitted();
 
     }
 }

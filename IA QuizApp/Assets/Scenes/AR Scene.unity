@@ -155,7 +155,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 15}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &75019672
 MonoBehaviour:
@@ -349,7 +349,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c10b1630d5621ec48a17223c3c102023, type: 2}
+  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -692,8 +692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 991964732}
-  plotPrefab: {fileID: 5761378256131357207, guid: cdb6daa0093764eb1bcf0688d6312430,
-    type: 3}
   planeGenerator: {fileID: 2239587526034146062, guid: ce128141d6ac242159cdea146b33a1c6,
     type: 3}
   pointCloud: {fileID: 1536853937296922, guid: 26558ae1d2e7243728486d789f984c53, type: 3}
@@ -701,10 +699,12 @@ MonoBehaviour:
     type: 3}
   manipulatorPrefab: {fileID: 1122865395318488, guid: 24556cd4924884d9aaa3d80135c8021d,
     type: 3}
-  masterCanvas: {fileID: 654619857}
-  arController: {fileID: 7400493966202244422, guid: 8a9526cba5f444cf5952cbcec9f65201,
+  plotPrefab: {fileID: 5761378256131357207, guid: cdb6daa0093764eb1bcf0688d6312430,
     type: 3}
+  masterCanvas: {fileID: 654619857}
   scatterPlotManager: {fileID: 8823525733032231880, guid: d0095d777936b422ea76988b32a5e2a6,
+    type: 3}
+  arController: {fileID: 7400493966202244422, guid: 8a9526cba5f444cf5952cbcec9f65201,
     type: 3}
 --- !u!4 &1962332444
 Transform:
@@ -835,13 +835,48 @@ PrefabInstance:
     - target: {fileID: 2087237427796040917, guid: aaf8d97caa35449629f5273434268e98,
         type: 3}
       propertyPath: m_Name
-      value: ARMasterCanvas
+      value: MasterCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087237427796040917, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456222231502410430, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456222231502410430, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456222231502410430, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2456222231502410430, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3646572883386427524, guid: aaf8d97caa35449629f5273434268e98,
         type: 3}
       propertyPath: selector
       value: 
       objectReference: {fileID: 548741103}
+    - target: {fileID: 3971622992392836444, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397742237468081958, guid: aaf8d97caa35449629f5273434268e98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9147178869285247314, guid: aaf8d97caa35449629f5273434268e98,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

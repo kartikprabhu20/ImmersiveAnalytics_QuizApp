@@ -20,7 +20,7 @@ public class TaskFactory : ITaskFactory
         {
             if (instance == null)
             {
-                instance = new TaskFactory(new QuestionFactory());
+                instance = new TaskFactory(QuestionFactory.Instance);
             }
             return instance;
         }

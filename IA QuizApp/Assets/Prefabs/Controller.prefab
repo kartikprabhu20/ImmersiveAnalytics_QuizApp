@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7400493966202244424}
   - component: {fileID: 7400493966202244425}
   m_Layer: 0
-  m_Name: ARController
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,5 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a6ddce29371486593e2542f7ae3e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterCanvas: {fileID: 2087237427796040913, guid: aaf8d97caa35449629f5273434268e98,
+  masterCanvas: {fileID: 2087237427796040917, guid: aaf8d97caa35449629f5273434268e98,
+    type: 3}
+  scatterplot: {fileID: 5761378256131357207, guid: cdb6daa0093764eb1bcf0688d6312430,
+    type: 3}
+  scatterPlotManager: {fileID: 8823525733032231880, guid: d0095d777936b422ea76988b32a5e2a6,
     type: 3}
