@@ -12,15 +12,17 @@ public abstract class Task : ITask
     public ITaskListener taskListener;
     public GameObject masterCanvas;
     public GameObject questionObject;
+    public GameObject scatterplotManager;
     public Button submitButton;
     public Button hideOverlayButton;
     public Button showOverlayButton;
     public string baseOverlay = "Overlay - Input"; //Defualt
 
-    public virtual void init(ITaskListener taskListener, GameObject masterCanvas)
+    public virtual void init(ITaskListener taskListener, GameObject masterCanvas, GameObject scatterPlotManager)
     {
         this.taskListener = taskListener;
         this.masterCanvas = masterCanvas;
+        this.scatterplotManager = scatterPlotManager;
 
         baseOverlay = (taskType == TaskType.TYPE_1) ? "Overlay - Input" : "Overlay - Option";
         masterCanvas.transform.Find("Overlay - Input").gameObject.SetActive(taskType == TaskType.TYPE_1);

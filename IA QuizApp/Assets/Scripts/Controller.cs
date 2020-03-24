@@ -20,9 +20,10 @@ public class Controller : MonoBehaviour
     void Start()
     {
         masterCanvas.SetActive(true); //In case of AR canvas needs to be set to active
+        scatterPlotManager.SetActive(true);
         taskFactory = TaskFactory.Instance; //singleton
-        taskListener = new TaskListener(taskFactory, masterCanvas);
-        taskFactory.getTask(COUNTER).init(taskListener, masterCanvas);
+        taskListener = new TaskListener(taskFactory, masterCanvas,scatterPlotManager);
+        taskFactory.getTask(COUNTER).init(taskListener, masterCanvas, scatterPlotManager);
     }
 
     // Update is called once per frame
@@ -56,18 +57,20 @@ public class Controller : MonoBehaviour
     {
         private TaskFactory taskFactory;
         private GameObject masterCanvas;
+        private GameObject scatterPlotManager;
 
-        public TaskListener(TaskFactory taskFactory, GameObject masterCanvas)
+        public TaskListener(TaskFactory taskFactory, GameObject masterCanvas, GameObject scatterPlotManager)
         {
             this.taskFactory = taskFactory;
             this.masterCanvas = masterCanvas;
+            this.scatterPlotManager = scatterPlotManager;
         }
 
         public void submitted()
         {
             Debug.Log("Counter:" + COUNTER);
             COUNTER++;
-            taskFactory.getTask(COUNTER).init(this, masterCanvas);
+            taskFactory.getTask(COUNTER).init(this, masterCanvas, scatterPlotManager);
         }
     }
 }

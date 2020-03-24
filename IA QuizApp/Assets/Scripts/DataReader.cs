@@ -52,10 +52,9 @@ public class DataReader : MonoBehaviour
         //BetterStreamingAssets.Initialize();
     }
 
-    public void LoadData()
+    public void LoadData(string fileName)
     {
         bool is3DPlot = true; // to be passed to this function as a parameter
-        string fileName = "Dataset/iris";  
         TextAsset fileContents = Resources.Load<TextAsset>(fileName);
 
         print("fileContents " + fileContents.text);
@@ -75,6 +74,11 @@ public class DataReader : MonoBehaviour
         LoadDataFrame(data, is3DPlot); // loads the contents from 'data' to 'DataFrame'
 
         print(RowCount + " " + ColumnCount);
+    }
+
+    public void LoadData()
+    {
+        LoadData("Dataset/iris");// Defualt
     }
 
     private int GetRowCount(string[] data)

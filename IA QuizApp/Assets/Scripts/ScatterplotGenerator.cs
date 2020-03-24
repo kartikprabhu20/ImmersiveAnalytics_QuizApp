@@ -30,13 +30,47 @@ public class ScatterplotGenerator : MonoBehaviour
 
     float plotscale = 0f;
 
-    //PlotLoader plotLoadIndicator;
+    string fileName = "";
 
-    public void initPlot()
+    public void reInit(string datasetName)
     {
 
+        //}
+
+        //public IEnumerator reInit(string datasetName)
+        //{
+        Debug.Log("Count:" + glyphList.Count);
+
+        glyphList.Clear();
+
+        if (dataPoints != null)
+            Array.Clear(dataPoints, 0, dataPoints.Length);
+        clusterColorMap.Clear();
+
+        int i = 0;
+        foreach (Transform child in pointsHolder.transform)
+        {
+            Debug.Log("Delete:" + child.name);
+            child.gameObject.SetActive(false);
+            Destroy(child.gameObject);
+
+            //if (i % 5 == 0)
+            //{
+            //    yield return new WaitForSeconds(.000000001f);
+            //}
+            i++;
+        }
+        initPlot(datasetName);
+    }
+
+
+    //PlotLoader plotLoadIndicator;
+
+    public void initPlot(string fileName)
+    {
+        this.fileName = fileName;
         //plotLoadIndicator = plotLoad;
-        reader.LoadData();
+        reader.LoadData(fileName);
         dataPoints = reader.DataFrame;
         rowCount = reader.RowCount;
         columnCount = reader.ColumnCount;
@@ -88,7 +122,7 @@ public class ScatterplotGenerator : MonoBehaviour
             //GlyphPoint glyphPoint = glyph.GetComponent("GlyphPoint") as GlyphPoint;
             glyph.transform.localScale *= plotscale; // Scale of GraphGen 
 
-            glyph.name = i.ToString();
+            glyph.name = fileName + i.ToString();
             //Debug.Log("Glyph: " + glyph.name + " " + glyph.transform.localScale);
             glyph.transform.rotation = pointsHolder.transform.rotation;
             glyph.transform.parent = pointsHolder.transform;

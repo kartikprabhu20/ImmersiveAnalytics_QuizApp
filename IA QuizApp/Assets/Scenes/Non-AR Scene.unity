@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -912,6 +912,12 @@ PrefabInstance:
       propertyPath: masterCanvas
       value: 
       objectReference: {fileID: 992627242}
+    - target: {fileID: 7400493966202244425, guid: 8a9526cba5f444cf5952cbcec9f65201,
+        type: 3}
+      propertyPath: scatterPlotManager
+      value: 
+      objectReference: {fileID: 8823525733032231880, guid: d0095d777936b422ea76988b32a5e2a6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a9526cba5f444cf5952cbcec9f65201, type: 3}
 --- !u!120 &1111770157 stripped
@@ -1048,17 +1054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c3068523748bd4186ff216f9cf062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glyph: {fileID: 1171664698}
+  glyph: {fileID: 8702390507927471751, guid: 94b88a3b3b65d44078561dd364654688, type: 3}
   points: {fileID: 1171664697}
 --- !u!1 &1171664697 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5761378255275330274, guid: cdb6daa0093764eb1bcf0688d6312430,
-    type: 3}
-  m_PrefabInstance: {fileID: 1171664694}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1171664698 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5761378256691871305, guid: cdb6daa0093764eb1bcf0688d6312430,
     type: 3}
   m_PrefabInstance: {fileID: 1171664694}
   m_PrefabAsset: {fileID: 0}

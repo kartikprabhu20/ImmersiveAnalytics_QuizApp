@@ -216,7 +216,7 @@ public class PlaneController : Manipulator
                     //Scatterplotmanager
                     scatterPlotManager.GetComponent<ScatterplotGenerator>().assignScatterPlot(plotPrefab);
                     scatterPlotManager = Instantiate(scatterPlotManager);
-                    scatterPlotManager.GetComponent<ScatterplotGenerator>().initPlot();
+                    //scatterPlotManager.GetComponent<ScatterplotGenerator>().initPlot("Dataset/iris");
 
                     //instantiate Controller
                     arController.GetComponent<Controller>().assignMasterCanvas(masterCanvas);

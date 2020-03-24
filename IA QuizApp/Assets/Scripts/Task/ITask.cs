@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ITask 
 {
-    void init(ITaskListener taskListener, GameObject masterCanvas);
+    void init(ITaskListener taskListener, GameObject masterCanvas, GameObject scatterPlotManager);
     void execute();
     void result();
     TaskState getState();

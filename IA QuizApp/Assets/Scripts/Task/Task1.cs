@@ -13,9 +13,9 @@ public class Task1 : Task
         this.questionFactory = questionFactory;
     }
 
-    public override void init(ITaskListener taskListener, GameObject masterCanvas)
+    public override void init(ITaskListener taskListener, GameObject masterCanvas, GameObject scatterPlotManager)
     {
-        base.init(taskListener, masterCanvas);
+        base.init(taskListener, masterCanvas,scatterPlotManager);
         setState(TaskState.INIT);
         base.taskListener = taskListener;
         question = questionFactory.getQuestion(1);
@@ -27,6 +27,7 @@ public class Task1 : Task
         Debug.Log("task1 execute");
         setState(TaskState.EXECUTION);
         questionObject.GetComponent<Text>().text = question.getText();
+        scatterplotManager.GetComponent<ScatterplotGenerator>().initPlot(question.getDatasetName());
         //result();
     }
 
