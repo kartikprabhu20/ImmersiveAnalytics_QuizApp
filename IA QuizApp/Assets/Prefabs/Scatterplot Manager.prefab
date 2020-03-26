@@ -44,11 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19399c7d37089c74ca70431001f63c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultGlyph: {fileID: 8702390507927471751, guid: 94b88a3b3b65d44078561dd364654688,
-    type: 3}
-  graphGen: {fileID: 483579576792725962, guid: c0169271424fc4721bb878817fd872d7, type: 3}
-  pointsHolder: {fileID: 2190801939733726004, guid: 660d2415f5ec94fbaa36d35438f433a8,
-    type: 3}
+  glyphPrefab: {fileID: 0}
+  scatterplotPrefab: {fileID: 0}
+  pointsParent: {fileID: 0}
   reader: {fileID: 5808926620404162150}
   glyphList: []
 --- !u!114 &5808926620404162150
@@ -63,5 +61,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910ceb7400284654f9cd9a1e28d5c5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OutlierList: 
-  DataText: {fileID: 0}

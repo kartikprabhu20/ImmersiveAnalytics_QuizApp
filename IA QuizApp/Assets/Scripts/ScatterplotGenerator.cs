@@ -1,96 +1,70 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ScatterplotGenerator : MonoBehaviour
 {
-    public GameObject defaultGlyph; // 3D model to generate as a glyph
-    public GameObject graphGen;
-    public GameObject pointsHolder; // Empty Parent to hold all the points, to avoid clutter
-
+    [SerializeField]
+    GameObject glyphPrefab;
+    [SerializeField]
+    GameObject scatterplotPrefab;
+    [SerializeField]
+    GameObject pointsParent;
     [SerializeField]
     DataReader reader;
+
+    Color defaultGlyphColor = Color.gray;
+    Color highlightGlyphColor = Color.red;
 
     DataReader.DataPoint[] dataPoints;
 
     public List<GameObject> glyphList = new List<GameObject>();
+    bool[] glyphScaleList;
 
-    Dictionary<string, int> clusterColorMap = new Dictionary<string, int>();
-    int colorMapCounter = 0;
-
-    Color[] clusterColors = { Color.magenta, Color.red, Color.gray, Color.yellow };
-
-    int rowIndex = 0;
-    int rowCount, columnCount;
 
     float xMin, yMin, zMin;
     float xMax, yMax, zMax;
 
     float plotscale = 0f;
+    float glyphScale = 1.5f;
 
-    string fileName = "";
+    string fileName;
 
     public void reInit(string datasetName)
     {
-
-        //}
-
-        //public IEnumerator reInit(string datasetName)
-        //{
-        Debug.Log("Count:" + glyphList.Count);
-
         glyphList.Clear();
 
         if (dataPoints != null)
             Array.Clear(dataPoints, 0, dataPoints.Length);
-        clusterColorMap.Clear();
 
-        int i = 0;
-        foreach (Transform child in pointsHolder.transform)
+        foreach (Transform child in pointsParent.transform)
         {
-            Debug.Log("Delete:" + child.name);
-            child.gameObject.SetActive(false);
             Destroy(child.gameObject);
-
-            //if (i % 5 == 0)
-            //{
-            //    yield return new WaitForSeconds(.000000001f);
-            //}
-            i++;
         }
         initPlot(datasetName);
     }
 
 
-    //PlotLoader plotLoadIndicator;
-
     public void initPlot(string fileName)
     {
         this.fileName = fileName;
-        //plotLoadIndicator = plotLoad;
         reader.LoadData(fileName);
         dataPoints = reader.DataFrame;
-        rowCount = reader.RowCount;
-        columnCount = reader.ColumnCount;
-
-        foreach (string clusterName in reader.ClusterMap.Keys)
-        {
-            clusterColorMap.Add(clusterName, colorMapCounter++);
-        }
 
         StartCoroutine(createScatterplot());
     }
 
-    public void assignScatterPlot(GameObject graphGenClone)
+    public void assignScatterPlot(GameObject scatterplotPrefabClone)
     {
-        graphGen = graphGenClone;
-        pointsHolder = graphGen.transform.Find("Points").gameObject;
+        scatterplotPrefab = scatterplotPrefabClone;
+        pointsParent = scatterplotPrefab.transform.Find("Points").gameObject;
     }
 
     IEnumerator createScatterplot()
     {
+
+        glyphScaleList = new bool[reader.RowCount];
 
         float[] minValues = getMinValues();
         float[] maxValues = getMaxValues();
@@ -102,39 +76,21 @@ public class ScatterplotGenerator : MonoBehaviour
         int i = 0;
         foreach (DataReader.DataPoint point in dataPoints)
         {
-            float plotOffset = 0.025f; // value offset to make sure point (0, 0) is not at the origin but a little away from it
+            float plotOffset = 0f;
 
             // normalize each data point & add offset
             float x = ((point.X - xMin) / (xMax - xMin)) + plotOffset;
             float y = ((point.Y - yMin) / (yMax - yMin)) + plotOffset;
             float z = ((point.Z - zMin) / (zMax - zMin)) + plotOffset;
+           
+            plotscale = scatterplotPrefab.transform.localScale.x;
+            objectPosition = new Vector3(x, y, z);
 
-
-            bool colorFlag = point.X == xMin || point.Y == yMin || point.Z == zMin || point.X == xMax || point.Y == yMax || point.Z == zMax;
-
-
-            plotscale = graphGen.transform.localScale.x;
-            Vector3 offsetToZeroCoordinate = new Vector3(-0.5f * plotscale, 0f, -0.5f * plotscale); //(-0.5,0,-0.5) is ZeroCordinates for plane
-            objectPosition = (new Vector3(x, y, z)) * plotscale + pointsHolder.transform.position;// + offsetToZeroCoordinate;
-
-            //yield return new WaitForSeconds(.000000001f);
-            glyph = Instantiate(defaultGlyph, objectPosition, Quaternion.identity);
-            //GlyphPoint glyphPoint = glyph.GetComponent("GlyphPoint") as GlyphPoint;
-            glyph.transform.localScale *= plotscale; // Scale of GraphGen 
-
-            glyph.name = fileName + i.ToString();
-            //Debug.Log("Glyph: " + glyph.name + " " + glyph.transform.localScale);
-            glyph.transform.rotation = pointsHolder.transform.rotation;
-            glyph.transform.parent = pointsHolder.transform;
-
-            if (clusterColorMap[point.Cluster] < clusterColors.Length)
-            {
-                glyph.GetComponent<Renderer>().material.color = clusterColors[clusterColorMap[point.Cluster]];
-            }
-            else
-            {
-                glyph.GetComponent<Renderer>().material.color = Color.white;
-            }
+            glyph = Instantiate(glyphPrefab, pointsParent.transform);
+            glyph.name = i.ToString();
+            glyph.layer = LayerMask.NameToLayer("Points");
+            glyph.transform.localPosition = objectPosition;
+            glyph.GetComponent<Renderer>().material.color = defaultGlyphColor;
 
             glyphList.Add(glyph);
 
@@ -142,9 +98,9 @@ public class ScatterplotGenerator : MonoBehaviour
             {
                 yield return new WaitForSeconds(.000000001f);
             }
+
             i++;
         }
-        //plotLoadIndicator.callback();
     }
 
     float[] getMinValues()
@@ -157,7 +113,7 @@ public class ScatterplotGenerator : MonoBehaviour
 
         foreach (DataReader.DataPoint point in dataPoints)
         {
-            if(point.X < minValues[0])
+            if (point.X < minValues[0])
             {
                 minValues[0] = point.X;
             }
@@ -214,15 +170,37 @@ public class ScatterplotGenerator : MonoBehaviour
 
     public List<GameObject> getGlyphList()
     {
-        //Debug.Log("getGlyphList: " + glyphList.Count);
-
         return glyphList;
     }
 
-    public GameObject getGraphGen()
+    public GameObject getscatterplotPrefab()
     {
-        //Debug.Log("getGlyphList: " + glyphList.Count);
+        return scatterplotPrefab;
+    }
 
-        return graphGen;
+    public DataReader.DataPoint GetGlyphData(int index)
+    {
+        return dataPoints[index];
+    }
+
+    public void AdjustGlyphScale(int index)
+    {
+        if (glyphScaleList[index])
+        {
+            glyphList[index].transform.localScale /= glyphScale;
+            glyphList[index].GetComponent<Renderer>().material.color = defaultGlyphColor;
+            glyphScaleList[index] = false;
+        }
+        else
+        {
+            glyphList[index].transform.localScale *= glyphScale;
+            glyphList[index].GetComponent<Renderer>().material.color = highlightGlyphColor;
+            glyphScaleList[index] = true;
+        }
+    }
+
+    public bool GetColorStatus(int index)
+    {
+        return glyphScaleList[index];
     }
 }
