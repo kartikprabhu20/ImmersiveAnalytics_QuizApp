@@ -17,6 +17,9 @@ public class ScatterplotGenerator : MonoBehaviour
     Color defaultGlyphColor = Color.gray;
     Color highlightGlyphColor = Color.red;
 
+    Color32[] colors = { new Color32(207, 74, 41, 255), new Color32(33, 50, 158, 255), new Color32(219, 24, 115, 255),
+                        new Color32(26, 200, 219, 255), new Color32(207, 174, 41, 255), new Color32(182, 204, 189, 255) };
+
     DataReader.DataPoint[] dataPoints;
 
     public List<GameObject> glyphList = new List<GameObject>();
@@ -101,6 +104,7 @@ public class ScatterplotGenerator : MonoBehaviour
 
             i++;
         }
+        SetClusterColors();
     }
 
     float[] getMinValues()
@@ -203,4 +207,41 @@ public class ScatterplotGenerator : MonoBehaviour
     {
         return glyphScaleList[index];
     }
+
+    public void SetClusterColors()
+    {
+        int index = 0;
+
+        foreach(DataReader.DataPoint dataPoint in dataPoints)
+        {
+            switch (dataPoint.Cluster)
+            {
+                case "A": 
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[0];
+                    break;
+
+                case "B":
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[1];
+                    break;
+
+                case "C":
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[2];
+                    break;
+
+                case "D":
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[3];
+                    break;
+
+                case "E":
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[4];
+                    break;
+
+                default: 
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[5];
+                    break;
+            }
+            index++;
+        }
+    }
+
 }
