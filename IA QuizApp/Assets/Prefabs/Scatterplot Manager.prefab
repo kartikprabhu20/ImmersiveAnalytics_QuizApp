@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19399c7d37089c74ca70431001f63c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glyphPrefab: {fileID: 0}
+  glyphPrefab: {fileID: 8702390507927471751, guid: 94b88a3b3b65d44078561dd364654688,
+    type: 3}
   scatterplotPrefab: {fileID: 0}
   pointsParent: {fileID: 0}
   reader: {fileID: 5808926620404162150}

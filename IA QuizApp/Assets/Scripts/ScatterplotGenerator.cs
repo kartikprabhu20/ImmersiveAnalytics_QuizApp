@@ -244,4 +244,9 @@ public class ScatterplotGenerator : MonoBehaviour
         }
     }
 
+    public string test()
+    {
+        return "tester";
+    }
+
 }

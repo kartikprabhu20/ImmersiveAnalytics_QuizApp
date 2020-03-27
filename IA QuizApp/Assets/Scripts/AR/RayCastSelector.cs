@@ -11,6 +11,10 @@ public class RayCastSelector : MonoBehaviour
     public Camera fpsCam;                                               // Holds a reference to the first person camera
     //public ARController controller;
     private GameObject scatterPlotPrefab;
+    private GameObject overlayPrefab;
+    TextMesh glyphDataText;
+    private GameObject scatterPlotManager;
+    private ScatterplotGenerator scatterplotGenerator;
     //private GameObject tooltips;
     //private GameObject mainToolTip;
     //private GameObject xyToolTip;
@@ -52,6 +56,9 @@ public class RayCastSelector : MonoBehaviour
         // Create a vector at the center of our camera's viewport
         Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
 
+        if(overlayPrefab != null)
+            overlayPrefab.transform.LookAt(fpsCam.transform);
+
         if (laserLine.enabled)
         {
             // Declare a raycast hit to store information about what our raycast has hit
@@ -68,6 +75,18 @@ public class RayCastSelector : MonoBehaviour
                 // Set the end position for our laser line 
                 laserLine.SetPosition(1, hit.point);
                 //Debug.Log("color1:" + previousGameObjectColor);
+
+                overlayPrefab.SetActive(true); // Add to AR
+                //overlayPrefab.GetComponent<Transform>().position = rayOrigin + new Vector3(100, 0, 0); // Add to AR
+                Debug.Log("scatterplotGenerator:" + scatterplotGenerator.test());
+                Debug.Log("scatterplotGenerator:" + Int32.Parse(hit.collider.gameObject.name));
+
+                
+
+                DataReader.DataPoint glyphInfo = scatterplotGenerator.GetGlyphData(Int32.Parse(hit.collider.gameObject.name)); // Add to AR
+                glyphDataText.text = "  x:  " + glyphInfo.X + "\n" +
+                                     "  y:  " + glyphInfo.Y + "\n" +
+                                     "  z:  " + glyphInfo.Z; // Add to AR
 
                 if (previousGameObject != hit.collider.gameObject)
                 {
@@ -89,7 +108,8 @@ public class RayCastSelector : MonoBehaviour
             {
                 //tooltips.SetActive(false);
                 // If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
-                GetComponent<AxisRaycast>().DisableRays();
+                overlayPrefab.SetActive(false); 
+                GetComponent<AxisRaycast>().DisableRays(); 
                 laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * rayCasteRange));
                 resetGameObject();
 
@@ -119,5 +139,27 @@ public class RayCastSelector : MonoBehaviour
     public void OnPointerUp()
     {
         laserLine.enabled = false;
+    }
+
+    //internal void assignOverlay(GameObject overlay)
+    //{
+    //    overlayPrefab = overlay;
+    //    glyphDataText = overlayPrefab.transform.Find("Background/DataText").gameObject.GetComponent<Text>();
+    //}
+    internal void assignScatterplotManager(GameObject scatterManager)
+    {
+        this.scatterPlotManager = scatterManager;
+        Debug.Log("scatterPlotManager:" + scatterPlotManager.GetComponent<ScatterplotGenerator>().test());
+
+        scatterplotGenerator = scatterPlotManager.GetComponent<ScatterplotGenerator>();
+
+    }
+
+    internal void assignScatterplot(GameObject scatterplot)
+    {
+        this.scatterPlotPrefab = scatterplot;
+        overlayPrefab = scatterplot.transform.Find("DatapointOverlay").gameObject;
+        glyphDataText = overlayPrefab.transform.Find("Text").GetComponent<TextMesh>();
+
     }
 }

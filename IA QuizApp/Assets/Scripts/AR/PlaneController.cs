@@ -5,6 +5,7 @@ using GoogleARCore.Examples.Common;
 using GoogleARCore.Examples.ObjectManipulation;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlaneController : Manipulator
 {
@@ -230,6 +231,10 @@ public class PlaneController : Manipulator
 
                     //assign cordinate lines
                     selector.GetComponent<AxisRaycast>().initLines(xLine,yLine,zLine);
+                    selector.GetComponent<RayCastSelector>().assignScatterplotManager(scatterPlotManager);
+                    selector.GetComponent<RayCastSelector>().assignScatterplot(plotPrefab);
+                    //selector.GetComponent<RayCastSelector>().assignOverlay(masterCanvas.transform.Find("DatapointOverlay").gameObject);
+
                     xLine.gameObject.SetActive(false);
                     yLine.gameObject.SetActive(false);
                     zLine.gameObject.SetActive(false);
