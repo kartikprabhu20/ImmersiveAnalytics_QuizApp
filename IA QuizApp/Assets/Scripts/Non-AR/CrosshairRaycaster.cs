@@ -61,7 +61,7 @@ public class CrosshairRaycaster : MonoBehaviour
             {
                 hitObject = hitInfo.collider;
                 hitObjectMaterial = hitObject.GetComponent<Renderer>().material;
-                initialColor = Color.gray;
+                initialColor = hitObjectMaterial.color;
             }
 
             isHighlighted = true;
