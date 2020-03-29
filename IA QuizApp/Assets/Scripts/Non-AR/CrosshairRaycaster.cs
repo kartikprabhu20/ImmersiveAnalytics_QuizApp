@@ -70,7 +70,8 @@ public class CrosshairRaycaster : MonoBehaviour
             overlayPrefab.SetActive(true); // Add to AR
             overlayPrefab.GetComponent<Transform>().position = rayOrigin + new Vector3(100, 0, 0); // Add to AR
             DataReader.DataPoint glyphInfo = scatterplotData.GetGlyphData(short.Parse(hitObject.name)); // Add to AR
-            glyphDataText.text = "  x:  " + glyphInfo.X + "\n" +
+            glyphDataText.text = "  Point:" + hitObject.name + "\n" +
+                                 "  x:  " + glyphInfo.X + "\n" +
                                  "  y:  " + glyphInfo.Y + "\n" +
                                  "  z:  " + glyphInfo.Z; // Add to AR
             if (currentRaycastTimer > RaycastTimer && !isScaled)
@@ -88,6 +89,7 @@ public class CrosshairRaycaster : MonoBehaviour
             {
                 hitObjectMaterial.color = highlightColor;
             }
+            GetComponent<AxisRaycast>().EnableRays();
             GetComponent<AxisRaycast>().UpdateLineRenderer(hitObject.transform); // Add to AR
         }
         else

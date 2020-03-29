@@ -34,7 +34,6 @@ public class AxisRaycast : MonoBehaviour
 
     public void UpdateLineRenderer(Transform m_transform)
     {
-        EnableRays();
         SetRays(m_transform);
 
         if (Physics.Raycast(xRay.origin, xRay.direction, out hitInfo, hitDistance, layerMask))
@@ -54,7 +53,7 @@ public class AxisRaycast : MonoBehaviour
         }
     }
 
-    private void EnableRays()
+    public void EnableRays()
     {
         xLine.gameObject.SetActive(true);
         yLine.gameObject.SetActive(true);

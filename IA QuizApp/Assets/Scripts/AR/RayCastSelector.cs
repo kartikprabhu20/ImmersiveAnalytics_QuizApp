@@ -50,6 +50,11 @@ public class RayCastSelector : MonoBehaviour
 
     }
 
+    internal void restore()
+    {
+        overlayPrefab.SetActive(false);
+        GetComponent<AxisRaycast>().DisableRays();
+    }
 
     void Update()
     {
@@ -70,6 +75,7 @@ public class RayCastSelector : MonoBehaviour
             // Check if our raycast has hit anything
             if (Physics.Raycast(rayOrigin, fpsCam.transform.forward, out hit, rayCasteRange, layerMask))
             {
+                GetComponent<AxisRaycast>().EnableRays();
                 GetComponent<AxisRaycast>().UpdateLineRenderer(hit.collider.transform);
 
                 // Set the end position for our laser line 
@@ -78,13 +84,10 @@ public class RayCastSelector : MonoBehaviour
 
                 overlayPrefab.SetActive(true); // Add to AR
                 //overlayPrefab.GetComponent<Transform>().position = rayOrigin + new Vector3(100, 0, 0); // Add to AR
-                Debug.Log("scatterplotGenerator:" + scatterplotGenerator.test());
-                Debug.Log("scatterplotGenerator:" + Int32.Parse(hit.collider.gameObject.name));
-
-                
 
                 DataReader.DataPoint glyphInfo = scatterplotGenerator.GetGlyphData(Int32.Parse(hit.collider.gameObject.name)); // Add to AR
-                glyphDataText.text = "  x:  " + glyphInfo.X + "\n" +
+                glyphDataText.text = "  Point:" + hit.collider.gameObject.name + "\n" +
+                                     "  x:  " + glyphInfo.X + "\n" +
                                      "  y:  " + glyphInfo.Y + "\n" +
                                      "  z:  " + glyphInfo.Z; // Add to AR
 
@@ -109,7 +112,7 @@ public class RayCastSelector : MonoBehaviour
                 //tooltips.SetActive(false);
                 // If we did not hit anything, set the end of the line to a position directly in front of the camera at the distance of weaponRange
                 overlayPrefab.SetActive(false); 
-                GetComponent<AxisRaycast>().DisableRays(); 
+                GetComponent<AxisRaycast>().DisableRays();
                 laserLine.SetPosition(1, rayOrigin + (fpsCam.transform.forward * rayCasteRange));
                 resetGameObject();
 
@@ -119,14 +122,18 @@ public class RayCastSelector : MonoBehaviour
         {    
            //Reset gameobject
            resetGameObject();
+           if (previousGameObject != null)
+                GetComponent<AxisRaycast>().UpdateLineRenderer(previousGameObject.transform);
         }
 
     }
 
     private void resetGameObject()
     {
-        if(previousGameObject != null)
-            previousGameObject.GetComponent<MeshRenderer>().material.color = previousGameObjectColor;
+        if (previousGameObject != null)
+             previousGameObject.GetComponent<MeshRenderer>().material.color = previousGameObjectColor;
+        
+
     }
 
     public void OnPointerDown()
