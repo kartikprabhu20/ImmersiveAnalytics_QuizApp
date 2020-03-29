@@ -137,7 +137,7 @@ x,y,z,cluster,tooltip
 7.7,3,6.1,C,Iris-virginica
 6.3,3.4,5.6,C,Iris-virginica
 6.4,3.1,5.5,C,Iris-virginica
-6,3,4.8,C,Iris-virginica
+6,3,4.8,E,Iris-virginica
 6.9,3.1,5.4,C,Iris-virginica
 6.7,3.1,5.6,C,Iris-virginica
 6.9,3.1,5.1,C,Iris-virginica
