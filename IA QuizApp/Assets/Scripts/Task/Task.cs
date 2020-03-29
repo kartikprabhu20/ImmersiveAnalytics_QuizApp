@@ -17,6 +17,7 @@ public abstract class Task : ITask
     public Button hideOverlayButton;
     public Button showOverlayButton;
     public string baseOverlay = "Overlay - Input"; //Defualt
+    public string baseQuestionPopup = "Popup - InputQuestion";//Default
 
     public virtual void init(ITaskListener taskListener, GameObject masterCanvas, GameObject scatterPlotManager)
     {
@@ -25,16 +26,44 @@ public abstract class Task : ITask
         this.scatterplotManager = scatterPlotManager;
 
         baseOverlay = (taskType == TaskType.TYPE_1) ? "Overlay - Input" : "Overlay - Option";
+        baseQuestionPopup = (taskType == TaskType.TYPE_1) ? "Popup - InputQuestion" : "Popup - OptionQuestion";
+
+
+        masterCanvas.transform.Find("Overlay - Input").gameObject.SetActive(!(taskType == TaskType.TYPE_1));
+        masterCanvas.transform.Find("Overlay - Option").gameObject.SetActive(!(taskType == TaskType.TYPE_2));
+
         masterCanvas.transform.Find("Overlay - Input").gameObject.SetActive(taskType == TaskType.TYPE_1);
         masterCanvas.transform.Find("Overlay - Option").gameObject.SetActive(taskType == TaskType.TYPE_2);
 
-        questionObject = masterCanvas.transform.Find(baseOverlay+"/Popup - Question/Container/Question").gameObject;
-        submitButton = masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/Button - Submit").GetComponent<Button>();
+        try
+        {
+            questionObject = masterCanvas.transform.Find(baseOverlay + "/"+baseQuestionPopup+"/Container/Question").gameObject;
+            submitButton = masterCanvas.transform.Find(baseOverlay + "/" + baseQuestionPopup + "/Container/Button - Submit").GetComponent<Button>();
+            hideOverlayButton = masterCanvas.transform.Find(baseOverlay + "/" + baseQuestionPopup + "/Container/Button - HideOverlay").GetComponent<Button>();
+
+        }
+        catch (NullReferenceException ex)
+        {
+            questionObject = masterCanvas.transform.Find(baseQuestionPopup + "/Container/Question").gameObject;
+            submitButton = masterCanvas.transform.Find(baseQuestionPopup + "/Container/Button - Submit").GetComponent<Button>();
+            hideOverlayButton = masterCanvas.transform.Find(baseQuestionPopup + "/Container/Button - HideOverlay").GetComponent<Button>();
+
+            //questionObject.transform.SetParent(masterCanvas.transform.Find(baseQuestionPopup).transform);
+
+            masterCanvas.transform.Find("Popup - InputQuestion").gameObject.SetActive(!(taskType == TaskType.TYPE_1));
+            masterCanvas.transform.Find("Popup - OptionQuestion").gameObject.SetActive(!(taskType == TaskType.TYPE_2));
+
+            masterCanvas.transform.Find("Popup - InputQuestion").gameObject.SetActive(taskType == TaskType.TYPE_1);
+            masterCanvas.transform.Find("Popup - OptionQuestion").gameObject.SetActive(taskType == TaskType.TYPE_2);
+
+        }
+
         submitButton.onClick.AddListener(result);
 
-        hideOverlayButton = masterCanvas.transform.Find(baseOverlay + "/Popup - Question/Container/Button - HideOverlay").GetComponent<Button>();
         showOverlayButton = masterCanvas.transform.Find(baseOverlay + "/Button - ShowOverlay").GetComponent<Button>();
         showOverlayButton.onClick.Invoke();
+
+       
     }
 
     public abstract void execute();

@@ -2537,7 +2537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15294118, g: 0.18039216, b: 0.1882353, a: 0.13725491}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2642,7 +2642,7 @@ GameObject:
   - component: {fileID: 3164149755356950351}
   - component: {fileID: 3164149755356950350}
   m_Layer: 0
-  m_Name: Popup - Question
+  m_Name: Popup - InputQuestion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

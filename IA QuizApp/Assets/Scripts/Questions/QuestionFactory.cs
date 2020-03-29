@@ -24,10 +24,13 @@ public class QuestionFactory : IQuestionFactory
         switch (questionNumber)
         {
             case 1:
-                question = new Question_1("Select the points which seem to be an outlier", "Dataset/haberman");
+                question = new Question_1("Enter the Point number which seems to be an outlier", "Dataset/haberman");
                 break;
             case 2:
-                question = new Question_1("Select the points which belong to be Cluster A", "Dataset/iris");
+                question = new Question_1("To which cluster does the Point in red color belong to?", "Dataset/iris");
+                break;
+            case 3:
+                question = new Question_1("What is the correlation between the points", "Dataset/correlation1");
                 break;
             default:
                 break;

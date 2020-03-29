@@ -37,6 +37,9 @@ public class TaskFactory : ITaskFactory
             case 2:
                 task = new Task2(questionFactory);
                 break;
+            case 3:
+                task = new Task3(questionFactory);
+                break;
             default:
                 break;
         }

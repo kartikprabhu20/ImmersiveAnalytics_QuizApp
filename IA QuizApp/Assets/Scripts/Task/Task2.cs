@@ -27,17 +27,17 @@ internal class Task2 : Task
         questionObject.GetComponent<Text>().text = question.getText();
         scatterplotManager.GetComponent<ScatterplotGenerator>().reInit(question.getDatasetName());
 
-        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 1/Label").gameObject.GetComponent<Text>().text = "test1";
-        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 2/Label").gameObject.GetComponent<Text>().text = "test2";
-        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 3/Label").gameObject.GetComponent<Text>().text = "test3";
-        masterCanvas.transform.Find("Popup - Question/Container/RadioGroup/Option 4/Label").gameObject.GetComponent<Text>().text = "test4";
+        masterCanvas.transform.Find(baseQuestionPopup + "/Container/RadioGroup/Option 1/Label").gameObject.GetComponent<Text>().text = "Orange";
+        masterCanvas.transform.Find(baseQuestionPopup + "/Container/RadioGroup/Option 2/Label").gameObject.GetComponent<Text>().text = "Green";
+        masterCanvas.transform.Find(baseQuestionPopup + "/Container/RadioGroup/Option 3/Label").gameObject.GetComponent<Text>().text = "Yellow";
+        masterCanvas.transform.Find(baseQuestionPopup + "/Container/RadioGroup/Option 4/Label").gameObject.GetComponent<Text>().text = "None";
 
     }
 
 
     public override void result()
     {
-        hideOverlayButton.onClick.Invoke();
+        //hideOverlayButton.onClick.Invoke();
         Debug.Log("task2 result");
         setState(TaskState.RESULT);
         taskListener.submitted();
