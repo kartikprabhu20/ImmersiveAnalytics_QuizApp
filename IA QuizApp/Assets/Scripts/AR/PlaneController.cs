@@ -223,6 +223,8 @@ public class PlaneController : Manipulator
                     arController.GetComponent<Controller>().assignMasterCanvas(masterCanvas);
                     arController.GetComponent<Controller>().assignScatterplot(plotPrefab);
                     arController.GetComponent<Controller>().assignScatterPlotManager(scatterPlotManager);
+                    arController.GetComponent<Controller>().assignSelector(selector);
+                    arController.GetComponent<Controller>().assignControllerType("AR");
                     arController = Instantiate(arController, hit.Pose.position, hit.Pose.rotation);
 
                     LineRenderer xLine = plotPrefab.transform.Find("Lines/LineX").gameObject.transform.GetComponent<LineRenderer>();
