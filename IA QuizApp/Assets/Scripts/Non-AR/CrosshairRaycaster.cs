@@ -103,7 +103,7 @@ public class CrosshairRaycaster : MonoBehaviour
             {
                 if (!scatterplotData.GetColorStatus(short.Parse(hitObject.name)))
                 {
-                    hitObjectMaterial.color = initialColor;
+                    scatterplotData.SetClusterColors();
                 }
                 hitObject = null;
                 hitObjectMaterial = null;

@@ -93,7 +93,6 @@ public class ScatterplotGenerator : MonoBehaviour
             glyph.name = i.ToString();
             glyph.layer = LayerMask.NameToLayer("Points");
             glyph.transform.localPosition = objectPosition;
-            glyph.GetComponent<Renderer>().material.color = defaultGlyphColor;
 
             glyphList.Add(glyph);
 
