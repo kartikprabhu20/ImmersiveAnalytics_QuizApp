@@ -14,11 +14,11 @@ public class ScatterplotGenerator : MonoBehaviour
     [SerializeField]
     DataReader reader;
 
-    Color defaultGlyphColor = Color.gray;
-    Color highlightGlyphColor = Color.red;
 
-    Color32[] colors = {  new Color32(255, 132, 0, 255), new Color32(66, 245, 66, 255), new Color32(250, 250, 0, 255),
-                         new Color32(200, 0, 250, 255),new Color32(250, 0, 0, 255),new Color32(66, 66, 245, 255) }; //{Orange,Green, Yellow, Red, Purple,Blue
+    Color32[] colors = { new Color32(229, 115, 115, 1), new Color32(255,138,101 ,1), new Color32(0,172,193 ,1),
+    new Color32(100, 181, 246, 1)};
+
+    Color highlightGlyphColor = Color.red;
 
     DataReader.DataPoint[] dataPoints;
 
@@ -191,7 +191,7 @@ public class ScatterplotGenerator : MonoBehaviour
         if (glyphScaleList[index])
         {
             glyphList[index].transform.localScale /= glyphScale;
-            glyphList[index].GetComponent<Renderer>().material.color = defaultGlyphColor;
+            glyphList[index].GetComponent<Renderer>().material.color = colors[0];
             glyphScaleList[index] = false;
         }
         else
@@ -236,7 +236,7 @@ public class ScatterplotGenerator : MonoBehaviour
                     break;
 
                 default: 
-                    glyphList[index].GetComponent<Renderer>().material.color = colors[5];
+                    glyphList[index].GetComponent<Renderer>().material.color = colors[0];
                     break;
             }
             index++;
